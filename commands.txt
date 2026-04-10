@@ -1,0 +1,8 @@
+sudo snap remove --purge firefox
+sudo snap remove --purge desktop-security-centre
+sudo snap remove --purge snap-store
+sudo snap remove --purge gtk-common-themes
+sudo snap remove --purge gnome-42-2204
+sudo snap remove --purge core22
+sudo snap remove --purge core24
+sudo snap remove --purge bare
