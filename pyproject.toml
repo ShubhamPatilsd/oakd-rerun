@@ -1,0 +1,13 @@
+[project]
+name = "oakd-rerun"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "depthai",
+    "open3d",
+    "rerun-sdk",
+    "numpy",
+    "opencv-python",
+]
