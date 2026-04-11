@@ -55,7 +55,7 @@ class RerunBridge(Node):
         rerun_host = self.get_parameter("rerun_host").get_parameter_value().string_value
 
         rr.init("chairbot_slam")
-        rr.connect(f"{rerun_host}:9876")
+        rr.connect_tcp(f"{rerun_host}:9876")
         self.get_logger().info(f"Rerun connected to {rerun_host}:9876")
 
         rr.log("world/", rr.ViewCoordinates.RIGHT_HAND_Y_DOWN, static=True)
