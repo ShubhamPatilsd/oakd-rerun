@@ -94,7 +94,7 @@ class RerunBridge(Node):
 
         depth = self._bridge.imgmsg_to_cv2(depth_msg, desired_encoding="passthrough")
 
-        rr.set_time_sequence("frame", self.frame_count)
+        rr.set_time("frame", sequence=self.frame_count)
         rr.log("world/camera/rgb", rr.Image(rgb))
         rr.log("world/camera/depth", rr.DepthImage(depth, meter=1000.0))
 
@@ -107,7 +107,7 @@ class RerunBridge(Node):
         translation = [p.x, p.y, p.z]
         R = _quat_to_rot3x3(q.x, q.y, q.z, q.w)
 
-        rr.set_time_sequence("frame", self.frame_count)
+        rr.set_time("frame", sequence=self.frame_count)
         rr.log(
             "world/camera",
             rr.Transform3D(translation=translation, mat3x3=R),
