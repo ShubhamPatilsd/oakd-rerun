@@ -70,8 +70,8 @@ class RerunBridge(Node):
         self._map_min_interval = 1.0             # 1 hz max
 
         # Synchronised RGB + depth
-        rgb_sub = Subscriber(self, Image, "/camera/color/image_raw")
-        depth_sub = Subscriber(self, Image, "/camera/depth/image_raw")
+        rgb_sub = Subscriber(self, Image, "/oak_d_lite/rgb/image_raw")
+        depth_sub = Subscriber(self, Image, "/oak_d_lite/stereo/image_raw")
         self._sync = ApproximateTimeSynchronizer(
             [rgb_sub, depth_sub], queue_size=10, slop=0.1
         )

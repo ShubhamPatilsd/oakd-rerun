@@ -1,6 +1,6 @@
 # On Pi:
 # source /opt/ros/jazzy/setup.bash
-# source ~/ros2_ws/install/setup.bash
+# source ~/oakd-rerun/install/setup.bash
 # ros2 launch chairbot slam.launch.py rerun_host:=<MAC_IP>
 #
 # On Mac:
@@ -34,12 +34,6 @@ def generate_launch_description():
                 "depth_fps": 15.0,
             }
         ],
-        remappings=[
-            ("/color/image", "/camera/color/image_raw"),
-            ("/color/camera_info", "/camera/color/camera_info"),
-            ("/stereo/image_raw", "/camera/depth/image_raw"),
-            ("/stereo/camera_info", "/camera/depth/camera_info"),
-        ],
     )
 
     rtabmap_odom_node = Node(
@@ -49,16 +43,16 @@ def generate_launch_description():
         output="screen",
         parameters=[
             {
-                "frame_id": "camera_link",
+                "frame_id": "oak_d_lite_rgb_camera_optical_frame",
                 "approx_sync": True,
                 "queue_size": 10,
             }
         ],
         remappings=[
-            ("/rgb/image", "/camera/color/image_raw"),
-            ("/rgb/camera_info", "/camera/color/camera_info"),
-            ("/depth/image", "/camera/depth/image_raw"),
-            ("/depth/camera_info", "/camera/depth/camera_info"),
+            ("/rgb/image", "/oak_d_lite/rgb/image_raw"),
+            ("/rgb/camera_info", "/oak_d_lite/rgb/camera_info"),
+            ("/depth/image", "/oak_d_lite/stereo/image_raw"),
+            ("/depth/camera_info", "/oak_d_lite/stereo/camera_info"),
         ],
     )
 
@@ -69,12 +63,11 @@ def generate_launch_description():
         output="screen",
         parameters=[
             {
-                "frame_id": "camera_link",
+                "frame_id": "oak_d_lite_rgb_camera_optical_frame",
                 "subscribe_depth": True,
                 "subscribe_rgb": True,
                 "queue_size": 10,
                 "approx_sync": True,
-                # Pi-tuned performance parameters
                 "Mem/STMSize": "30",
                 "Vis/MaxFeatures": "500",
                 "RGBD/AngularUpdate": "0.01",
@@ -83,10 +76,10 @@ def generate_launch_description():
             }
         ],
         remappings=[
-            ("/rgb/image", "/camera/color/image_raw"),
-            ("/rgb/camera_info", "/camera/color/camera_info"),
-            ("/depth/image", "/camera/depth/image_raw"),
-            ("/depth/camera_info", "/camera/depth/camera_info"),
+            ("/rgb/image", "/oak_d_lite/rgb/image_raw"),
+            ("/rgb/camera_info", "/oak_d_lite/rgb/camera_info"),
+            ("/depth/image", "/oak_d_lite/stereo/image_raw"),
+            ("/depth/camera_info", "/oak_d_lite/stereo/camera_info"),
         ],
     )
 
