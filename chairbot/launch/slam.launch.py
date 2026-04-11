@@ -37,8 +37,28 @@ def generate_launch_description():
         remappings=[
             ("/color/image", "/camera/color/image_raw"),
             ("/color/camera_info", "/camera/color/camera_info"),
-            ("/stereo/depth", "/camera/depth/image_raw"),
+            ("/stereo/image_raw", "/camera/depth/image_raw"),
             ("/stereo/camera_info", "/camera/depth/camera_info"),
+        ],
+    )
+
+    rtabmap_odom_node = Node(
+        package="rtabmap_odom",
+        executable="rgbd_odometry",
+        name="rtabmap_odom",
+        output="screen",
+        parameters=[
+            {
+                "frame_id": "camera_link",
+                "approx_sync": True,
+                "queue_size": 10,
+            }
+        ],
+        remappings=[
+            ("/rgb/image", "/camera/color/image_raw"),
+            ("/rgb/camera_info", "/camera/color/camera_info"),
+            ("/depth/image", "/camera/depth/image_raw"),
+            ("/depth/camera_info", "/camera/depth/camera_info"),
         ],
     )
 
@@ -84,6 +104,7 @@ def generate_launch_description():
         [
             rerun_host_arg,
             depthai_node,
+            rtabmap_odom_node,
             rtabmap_node,
             rerun_bridge_node,
         ]
